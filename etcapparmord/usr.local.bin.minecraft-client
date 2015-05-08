@@ -4,6 +4,8 @@
   #include <abstractions/base>
 
   /usr/bin/make ix,
+  /bin/mkdir ix,
+  /usr/bin/wget ix,
   /usr/local/bin/minecraft-client r,
   /usr/lib/jvm/java-?-*/jre/bin/java ix,
 
@@ -18,15 +20,15 @@
   network netlink raw,
 
   deny /sys/devices/system/cpu/ r,
-  deny /sys/devices/** r,
   
   /usr/share/java/jayatana.jar r,
   /usr/share/java/jayatanaag.jar r,
 
   /etc/passwd r,
+  /etc/wgetrc r,
   /etc/nsswitch.conf r,
   /etc/java-?-*/*.properties r,
-  /etc/ssl/certs/** r,
+  /etc/ssl/** r,
   /etc/java-?-openjdk/jvm-amd64.cfg r,
   /etc/lsb-release r,
   /etc/hosts r,
@@ -64,6 +66,7 @@
   /usr/share/glib-?.?/schemas/gschemas.compiled r,
   /usr/local/share/glib-?.?/schemas/gschemas.compiled r,
 
+  /usr/share/ca-certificates/** r,
   /etc/fonts/fonts.conf r,
   /etc/fonts/conf.d/ r,
   /etc/fonts/conf.d/* r,
@@ -97,6 +100,7 @@
   dbus (send)
     bus=fcitx,
 
+  @{HOME}/.netrc r,
   @{HOME}/.config/fcitx/dbus/* r,
 
   /run/user/@{pid}/dconf/user rw,

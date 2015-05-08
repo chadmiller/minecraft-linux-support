@@ -1,12 +1,14 @@
 #!/usr/bin/make -f
 
-run: $(HOME)/.minecraft/client.jar
-	cd $(HOME)/.minecraft && exec java -jar client.jar
+JARFILE := $(HOME)/.minecraft/client.jar
 
-$(HOME)/.minecraft/client.jar:
+run: $(JARFILE)
+	cd "$(dir $<)" && exec java -jar "$<"
+
+$(JARFILE):
+	mkdir -p "$(dir $@)"
 	wget -O $@ https://s3.amazonaws.com/Minecraft.Download/launcher/Minecraft.jar
 
-$(HOME)/.minecraft:
-	mkdir $@
+.SECONDARY: $(JARFILE)
 
-.INTERMEDIATE: /home/cmiller/.minecraft/client.jar
+.PHONY: run

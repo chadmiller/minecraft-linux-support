@@ -1,14 +1,15 @@
 #!/usr/bin/make -f
 
-VER=1.8.4
+VER := 1.8.4
+JARFILE := $(HOME)/.minecraft/server.jar
 
-run: $(HOME)/.minecraft/server.jar
-	cd ~/.minecraft && exec java -Xmx1024M -Xms1024M -jar $< nogui
+run: $(JARFILE)
+	cd "$(dir $<)" && exec java -Xmx1024M -Xms1024M -jar "$<" nogui
 
-$(HOME)/.minecraft/server.jar: $(HOME)/.minecraft
-	wget -O $@ https://s3.amazonaws.com/Minecraft.Download/versions/$(VER)/minecraft_server.$(VER).jar
+$(JARFILE):
+	mkdir -p "$(dir $@)"
+	wget -O $@ "https://s3.amazonaws.com/Minecraft.Download/versions/$(VER)/minecraft_server.$(VER).jar"
 
-$(HOME)/.minecraft:
-	mkdir $@
+.SECONDARY: $(JARFILE)
 
-.SECONDARY: /home/cmiller/.minecraft/server.jar
+.PHONY: run
