@@ -14,3 +14,8 @@ Install these files in the appropriate locations. Then,
     $ sudo aa-enforce /usr/local/bin/minecraft-server
     $ sudo aa-enforce /usr/local/bin/minecraft-client
 
+After the first time, you don't have to do these.
+
+Then, run "minecraft-server" or "minecraft-client".
+
+If you create different "level-names" in your server.properties, it must start with "world".
