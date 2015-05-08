@@ -18,7 +18,13 @@ After the first time, you don't have to do these.
 
 Then, run "minecraft-server" or "minecraft-client".
 
+## Caveats and limitations
+
+Your data is kept in ~/.minecraft.
+
 If you create different "level-names" in your server.properties, it must start with "world".
+
+## Discover and report problems
 
 First time you run it, run
 
