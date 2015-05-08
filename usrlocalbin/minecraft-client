@@ -9,4 +9,4 @@ $(HOME)/.minecraft/client.jar:
 $(HOME)/.minecraft:
 	mkdir $@
 
-.PRECIOUS: /home/cmiller/.minecraft/client.jar
+.INTERMEDIATE: /home/cmiller/.minecraft/client.jar

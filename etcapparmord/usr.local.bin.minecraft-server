@@ -7,7 +7,11 @@
 
   deny /usr/local/bin/ r,
 
+  @{HOME}/.minecraft/ w,
+  @{HOME}/.minecraft/logs/ w,
+  @{HOME}/.minecraft/eula.txt w,
   /usr/bin/wget ix,
+  /bin/mkdir ix,
   /etc/wgetrc r,
   @{HOME}/.netrc r,
   /usr/share/ca-certificates/** r,

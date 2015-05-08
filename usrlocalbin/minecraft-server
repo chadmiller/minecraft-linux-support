@@ -11,4 +11,4 @@ $(HOME)/.minecraft/server.jar: $(HOME)/.minecraft
 $(HOME)/.minecraft:
 	mkdir $@
 
-.PRECIOUS: /home/cmiller/.minecraft/server.jar
+.SECONDARY: /home/cmiller/.minecraft/server.jar
