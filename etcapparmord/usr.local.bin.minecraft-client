@@ -18,6 +18,7 @@
   network netlink raw,
 
   deny /sys/devices/system/cpu/ r,
+  deny /sys/devices/** r,
   
   /usr/share/java/jayatana.jar r,
   /usr/share/java/jayatanaag.jar r,
