@@ -1,0 +1,64 @@
+#include <tunables/global>
+
+/usr/local/bin/minecraft-server {
+  #include <abstractions/base>
+
+  /usr/local/bin/minecraft-server r,
+
+  deny /usr/local/bin/ r,
+
+  /usr/bin/wget ix,
+  /etc/wgetrc r,
+  @{HOME}/.netrc r,
+  /usr/share/ca-certificates/** r,
+  /home/cmiller/.minecraft/server.jar rw,
+
+  /bin/dash ix,
+
+  /usr/lib/jvm/*/jre/bin/java ix,
+  owner @{HOME}/.minecraft/server.jar r,
+
+  /etc/java-8-openjdk/jvm-amd64.cfg r,
+
+  deny /sys/devices/system/cpu/ r,
+
+  network inet dgram,
+  network inet stream,
+  network inet6 dgram,
+  network inet6 stream,
+  network netlink raw,
+
+  /usr/bin/make ix,
+
+  deny /usr/bin/id x,
+  deny /etc/passwd r,
+  /etc/gai.conf r,
+  /etc/host.conf r,
+  /etc/hosts r,
+  /etc/nsswitch.conf r,
+  /etc/ssl/** r,
+  /etc/timezone r,
+  /run/resolvconf/resolv.conf r,
+
+  /etc/java-8-*/security/* r,
+  /etc/java-8-*/*.properties r,
+
+  /usr/share/java/jayatana.jar r,
+  /usr/share/java/jayatanaag.jar r,
+  /usr/share/java/java-atk-wrapper.jar r,
+
+  owner @{HOME}/.minecraft/eula.txt r,
+  @{HOME}/.minecraft/server.properties rw,
+  @{HOME}/.minecraft/*.json rw,
+  @{HOME}/.minecraft/logs/*.log* rw,
+
+  # require all "level-name" values in server.properties to start with world
+  @{HOME}/.minecraft/world*/** rw,
+
+  @{PROC}/@{pid}/net/ipv6_route r,
+  @{PROC}/@{pid}/net/if_inet6 r,
+  @{PROC}/@{pid}/fd/ r,
+  @{PROC}/sys/net/core/somaxconn r,
+
+  /tmp/libnetty-transport-native-epoll*.so rw,
+}

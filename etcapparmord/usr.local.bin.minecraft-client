@@ -1,0 +1,140 @@
+#include <tunables/global>
+
+/usr/local/bin/minecraft-client {
+  #include <abstractions/base>
+
+  /usr/bin/make ix,
+  /usr/local/bin/minecraft-client r,
+  /usr/lib/jvm/java-?-*/jre/bin/java ix,
+
+  /bin/dash ix,
+
+  deny /usr/local/bin/ r,
+  network unix stream,
+  network inet stream,
+  network inet6 stream,
+  network inet dgram,
+  network inet6 dgram,
+  network netlink raw,
+
+  deny /sys/devices/system/cpu/ r,
+  
+  /usr/share/java/jayatana.jar r,
+  /usr/share/java/jayatanaag.jar r,
+
+  /etc/passwd r,
+  /etc/nsswitch.conf r,
+  /etc/java-?-*/*.properties r,
+  /etc/ssl/certs/** r,
+  /etc/java-?-openjdk/jvm-amd64.cfg r,
+  /etc/lsb-release r,
+  /etc/hosts r,
+  /etc/host.conf r,
+  /etc/java-?-*/security/* r,
+  /etc/timezone r,
+  /run/resolvconf/resolv.conf r,
+  /etc/libnl-3/classid r,
+  /var/lib/dbus/machine-id r,
+  /etc//gai.conf r,
+
+  /usr/share/java/java-atk-wrapper.jar r,
+
+  /usr/share/icons/** r,
+
+  /tmp/hsperfdata_*/ rw,
+  /tmp/hsperfdata_*/@{pid} rw,
+
+  /tmp/imageio*.tmp rw,
+
+  /usr/share/javazi/** r,
+
+  @{PROC}/@{pid}/net/if_inet6 r,
+  @{PROC}/@{pid}/net/ipv6_route r,
+  @{PROC}/@{pid}/net/psched r,
+  @{PROC}/@{pid}/cmdline r,
+  @{PROC}/sys/net/ipv4/ip_local_port_range r,
+  @{PROC}/@{pid}/fd/ r,
+  @{PROC}/@{pid}/stat r,
+
+  /dev/dri/card* rw,
+  /etc/drirc r,
+
+  /usr/share/themes/** r,
+  /usr/share/glib-?.?/schemas/gschemas.compiled r,
+  /usr/local/share/glib-?.?/schemas/gschemas.compiled r,
+
+  /etc/fonts/fonts.conf r,
+  /etc/fonts/conf.d/ r,
+  /etc/fonts/conf.d/* r,
+  @{HOME}/.java/fonts/*/*.properties r,
+  /etc/fonts/conf.avail/* r,
+  /etc/fonts/conf.avail/*.conf/ r,
+  /etc/fonts/conf.avail/*.conf/** r,
+  /usr/share/fonts/** r,
+  /usr/local/share/fonts/ r,
+  /usr/share/javascript/mathjax/fonts/HTML-CSS/TeX/otf/ r,
+  /usr/share/javascript/mathjax/fonts/HTML-CSS/TeX/otf/** r,
+  /usr/local/share/fonts/** r,
+  /usr/share/texlive/texmf-dist/fonts/** r,
+  /var/cache/fontconfig/* r,
+  /var/cache/fontconfig/** r,
+  /usr/share/texmf/fonts/** r,
+  /usr/share/fonts/ r,
+  /usr/share/poppler/** r,
+  /usr/share/fontconfig/*/* r,
+
+  dbus (send)
+    bus=session
+    path=/org/freedesktop/DBus
+    interface=org.freedesktop.DBus,
+
+  dbus (send)
+    bus=session
+    path=/org/gtk/vfs/mounttracker
+    interface=org.gtk.vfs.MountTracker,
+
+  dbus (send)
+    bus=fcitx,
+
+  @{HOME}/.config/fcitx/dbus/* r,
+
+  /run/user/@{pid}/dconf/user rw,
+  @{HOME}/.config/dconf/user r,
+
+  @{HOME}/.Xauthority r,
+
+  @{HOME}/.minecraft/ rw,
+  @{HOME}/.minecraft/** rw,
+
+  deny /tmp/ r,
+  deny /var/tmp/ r,  
+
+  /run/shm/ r,
+  /dev/shm/pulse-shm-* rw,
+  /run/shm/pulse-shm-* rw,
+  /etc/ld.so.cache r,
+  /dev/tty r,
+  /proc/uptime r,
+  /etc/udev/udev.conf r,
+  /sys/devices/pci*/*/uevent r,
+  /run/udev/data/+pci:* r,
+  /etc/openal/alsoft.conf r,
+  /etc/pulse/client.conf r,
+  /usr/share/alsa/alsa.conf r,
+  
+
+  /lib/** r,
+  /usr/lib/** r,
+  /run/user/*/pulse/native rw,
+  /etc/machine-id r,
+  /dev/shm/ rw,
+  deny /proc/ r,
+  /proc/sys/kernel/pid_max r,
+
+  /bin/ps ix,
+  /usr/bin/xrandr ix,
+  /usr/bin/pulseaudio ix,
+  deny /usr/bin/id x,
+
+  /tmp/libnetty-transport-native-epoll*.so rw,
+}

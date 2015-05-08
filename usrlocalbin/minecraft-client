@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+run: $(HOME)/.minecraft/client.jar
+	cd $(HOME)/.minecraft && exec java -jar client.jar
+
+$(HOME)/.minecraft/client.jar:
+	wget -O $@ https://s3.amazonaws.com/Minecraft.Download/launcher/Minecraft.jar
+
+$(HOME)/.minecraft:
+	mkdir $@
+
+.PRECIOUS: /home/cmiller/.minecraft/client.jar

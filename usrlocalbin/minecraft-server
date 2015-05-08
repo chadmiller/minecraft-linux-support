@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+VER=1.8.4
+
+run: $(HOME)/.minecraft/server.jar
+	cd ~/.minecraft && exec java -jar $< nogui
+
+$(HOME)/.minecraft/server.jar: $(HOME)/.minecraft
+	wget -O $@ https://s3.amazonaws.com/Minecraft.Download/versions/$(VER)/minecraft_server.$(VER).jar
+
+$(HOME)/.minecraft:
+	mkdir $@
+
+.PRECIOUS: /home/cmiller/.minecraft/server.jar
