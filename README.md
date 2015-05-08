@@ -19,3 +19,9 @@ After the first time, you don't have to do these.
 Then, run "minecraft-server" or "minecraft-client".
 
 If you create different "level-names" in your server.properties, it must start with "world".
+
+First time you run it, run
+
+    $ dmesg |grep apparmor= |grep minecraft-
+    
+and [open a bug report](https://github.com/chadmiller/minecraft-linux-support/issues/new?title=missed-apparmor-rules)
