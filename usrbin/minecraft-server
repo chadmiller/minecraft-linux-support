@@ -1,15 +1,22 @@
 #!/usr/bin/make -f
 
-VER := 1.8.4
 JARFILE := $(HOME)/.minecraft/server.jar
+RELEASE_INFO_URL := https://s3.amazonaws.com/Minecraft.Download/versions/versions.json
 
 run: $(JARFILE)
 	cd "$(dir $<)" && exec java -Xmx1024M -Xms1024M -jar "$<" nogui
 
-$(JARFILE):
+$(JARFILE):: VER := $(shell wget -q -O - $(RELEASE_INFO_URL) |python3 -c 'import json, sys; print(json.load(sys.stdin)["latest"]["release"])')
+$(JARFILE):: $(JARFILE).freshness
+$(JARFILE)::
 	mkdir -p "$(dir $@)"
-	wget -O $@ "https://s3.amazonaws.com/Minecraft.Download/versions/$(VER)/minecraft_server.$(VER).jar"
+	wget -O $@ --progress=dot:mega "https://s3.amazonaws.com/Minecraft.Download/versions/$(VER)/minecraft_server.$(VER).jar"
 
-.SECONDARY: $(JARFILE)
+$(JARFILE).freshness:
+	mkdir -p "$(dir $@)"
+	echo "The timestamp of this file is used to mark when the server jar should be considered old." >"$@"
+	touch --date "now + 30 days" "$@"
+
+.SECONDARY: $(JARFILE) $(JARFILE).freshness
 
 .PHONY: run
