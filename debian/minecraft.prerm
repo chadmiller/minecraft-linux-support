@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -e
+
+for name in server client; do
+	apparmor_parser -R /etc/apparmor.d/usr.bin.minecraft-$name || true
+done

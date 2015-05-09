@@ -1,0 +1,26 @@
+Source: minecraft
+Section: games
+Priority: optional
+Maintainer: Chad MILLER <chad.miller@canonical.com>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.5
+Homepage: https://minecraft.net/
+Vcs-Git: https://github.com/chadmiller/minecraft-linux-support
+Vcs-Browser: https://github.com/chadmiller/minecraft-linux-support
+
+Package: minecraft
+Architecture: all
+Depends: ${misc:Depends}, 
+  make,
+  wget, ca-certificates,
+  openjdk-8-jdk | java8-jdk
+Recommends: apparmor
+Description: Free-form game of resources and building
+ You walk the land, finding food, building materials, and
+ crafting tools and devices to make your world nicer. Watch
+ out for night-time monsters!
+ .
+ This does not contain any proprietary minecraft code. It will
+ download what it needs to run.
+ .
+ To play on a public server, you need an account.
