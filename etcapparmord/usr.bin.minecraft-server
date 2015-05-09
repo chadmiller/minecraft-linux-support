@@ -1,11 +1,11 @@
 #include <tunables/global>
 
-/usr/local/bin/minecraft-server {
+/usr/bin/minecraft-server {
   #include <abstractions/base>
 
-  /usr/local/bin/minecraft-server r,
+  /usr/bin/minecraft-server r,
 
-  deny /usr/local/bin/ r,
+  deny /usr/bin/ r,
 
   @{HOME}/.minecraft/ w,
   @{HOME}/.minecraft/logs/ w,

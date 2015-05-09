@@ -1,17 +1,17 @@
 #include <tunables/global>
 
-/usr/local/bin/minecraft-client {
+/usr/bin/minecraft-client {
   #include <abstractions/base>
 
   /usr/bin/make ix,
   /bin/mkdir ix,
   /usr/bin/wget ix,
-  /usr/local/bin/minecraft-client r,
+  /usr/bin/minecraft-client r,
   /usr/lib/jvm/java-?-*/jre/bin/java ix,
 
   /bin/dash ix,
 
-  deny /usr/local/bin/ r,
+  deny /usr/bin/ r,
   network unix stream,
   network inet stream,
   network inet6 stream,
