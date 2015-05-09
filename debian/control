@@ -13,7 +13,9 @@ Architecture: all
 Depends: ${misc:Depends}, 
   make,
   wget, ca-certificates,
-  openjdk-8-jdk | java8-jdk
+  openjdk-8-jdk | java8-jdk,
+  jayatana,
+  python3-minimal | python3
 Recommends: apparmor
 Description: Free-form game of resources and building
  You walk the land, finding food, building materials, and

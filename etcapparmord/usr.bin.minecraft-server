@@ -7,20 +7,17 @@
 
   deny /usr/bin/ r,
 
-  @{HOME}/.minecraft/ w,
-  @{HOME}/.minecraft/logs/ w,
-  @{HOME}/.minecraft/eula.txt w,
   /usr/bin/wget ix,
   /bin/mkdir ix,
-  /etc/wgetrc r,
-  @{HOME}/.netrc r,
-  /usr/share/ca-certificates/** r,
-  /home/cmiller/.minecraft/server.jar rw,
-
-  /bin/dash ix,
-
+  /usr/bin/python3 ix,
+  /usr/bin/python3.* ix,
   /usr/lib/jvm/*/jre/bin/java ix,
-  owner @{HOME}/.minecraft/server.jar r,
+  /bin/dash ix,
+  /usr/bin/make ix,
+
+  /etc/wgetrc r,
+  owner @{HOME}/.netrc r,
+  /usr/share/ca-certificates/** r,
 
   /etc/java-8-openjdk/jvm-amd64.cfg r,
 
@@ -32,7 +29,6 @@
   network inet6 stream,
   network netlink raw,
 
-  /usr/bin/make ix,
 
   deny /usr/bin/id x,
   deny /etc/passwd r,
@@ -44,6 +40,9 @@
   /etc/timezone r,
   /run/resolvconf/resolv.conf r,
 
+  deny /usr/local/lib/python3.*/dist-packages/ r,
+  deny @{HOME} r,
+
   /etc/java-8-*/security/* r,
   /etc/java-8-*/*.properties r,
 
@@ -51,10 +50,16 @@
   /usr/share/java/jayatanaag.jar r,
   /usr/share/java/java-atk-wrapper.jar r,
 
+  owner @{HOME}/.minecraft/server.jar r,
   owner @{HOME}/.minecraft/eula.txt r,
+  owner @{HOME}/.minecraft/ rw,
   @{HOME}/.minecraft/server.properties rw,
-  @{HOME}/.minecraft/*.json rw,
+  owner @{HOME}/.minecraft/*.json rw,
+  @{HOME}/.minecraft/logs/ w,
   @{HOME}/.minecraft/logs/*.log* rw,
+  @{HOME}/.minecraft/server.jar rw,
+  @{HOME}/.minecraft/server.jar.freshness w,
+  @{HOME}/.minecraft/eula.txt w,
 
   # require all "level-name" values in server.properties to start with world
   @{HOME}/.minecraft/world*/** rw,
@@ -64,5 +69,5 @@
   @{PROC}/@{pid}/fd/ r,
   @{PROC}/sys/net/core/somaxconn r,
 
-  /tmp/libnetty-transport-native-epoll*.so rw,
+  owner /tmp/libnetty-transport-native-epoll*.so rw,
 }
