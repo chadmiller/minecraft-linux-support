@@ -1,2 +1,4 @@
 etcapparmord/* etc/apparmor.d/
 usrbin/* usr/bin/
+minecraft-client.desktop usr/share/applications
+minecraft-client.svg usr/share/icons/hicolor/scalable/apps

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Minecraft
+GenericName=Game
+Comment=Break and place blocks to build imaginative things
+Exec=/usr/bin/minecraft-client
+Icon=minecraft-client
+Categories=Game
+StartupNotify=true
+StartupWMClass=net-minecraft-bootstrap-Bootstrap
