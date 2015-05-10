@@ -10,6 +10,7 @@ $(JARFILE):: VER := $(shell wget -q -O - $(RELEASE_INFO_URL) |python3 -c 'import
 $(JARFILE):: $(JARFILE).freshness
 $(JARFILE)::
 	mkdir -p "$(dir $@)"
+	rm -f "$@"
 	wget -O $@ --progress=dot:mega "https://s3.amazonaws.com/Minecraft.Download/versions/$(VER)/minecraft_server.$(VER).jar"
 
 $(JARFILE).freshness:
