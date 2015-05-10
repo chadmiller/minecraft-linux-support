@@ -1,0 +1,4 @@
+debian/files
+debian/minecraft.debhelper*
+debian/minecraft.substvars
+debian/minecraft/
