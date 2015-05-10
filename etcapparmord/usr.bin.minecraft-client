@@ -3,15 +3,17 @@
 /usr/bin/minecraft-client {
   #include <abstractions/base>
 
+  /usr/bin/minecraft-client r,
   /usr/bin/make ix,
+  /bin/dash ix,
   /bin/mkdir ix,
   /usr/bin/wget ix,
-  /usr/bin/minecraft-client r,
   /usr/lib/jvm/java-?-*/jre/bin/java ix,
+  /bin/ps ix,
+  /usr/bin/xrandr ix,
+  /usr/bin/pulseaudio ix,
+  deny /usr/bin/id x,
 
-  /bin/dash ix,
-
-  deny /usr/bin/ r,
   network unix stream,
   network inet stream,
   network inet6 stream,
@@ -24,6 +26,8 @@
   
   /usr/share/java/jayatana.jar r,
   /usr/share/java/jayatanaag.jar r,
+
+  deny /usr/bin/ r,
 
   /etc/passwd r,
   /etc/wgetrc r,
@@ -104,13 +108,13 @@
   @{HOME}/.netrc r,
   @{HOME}/.config/fcitx/dbus/* r,
 
-  /run/user/@{pid}/dconf/user rw,
-  @{HOME}/.config/dconf/user r,
+  owner /run/user/@{pid}/dconf/user rw,
+  owner @{HOME}/.config/dconf/user r,
 
-  @{HOME}/.Xauthority r,
+  owner @{HOME}/.Xauthority r,
 
-  @{HOME}/.minecraft/ rw,
-  @{HOME}/.minecraft/** rw,
+  owner @{HOME}/.minecraft/ rw,
+  owner @{HOME}/.minecraft/** rw,
 
   deny /tmp/ r,
   deny /var/tmp/ r,  
@@ -134,11 +138,6 @@
   /dev/shm/ rw,
   deny /proc/ r,
   /proc/sys/kernel/pid_max r,
-
-  /bin/ps ix,
-  /usr/bin/xrandr ix,
-  /usr/bin/pulseaudio ix,
-  deny /usr/bin/id x,
 
   /tmp/libnetty-transport-native-epoll*.so rw,
 }
