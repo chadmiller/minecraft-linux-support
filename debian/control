@@ -17,6 +17,7 @@ Depends: ${misc:Depends},
   jayatana,
   python3-minimal | python3
 Recommends: apparmor
+Suggests: tmux
 Description: Free-form game of resources and building
  You walk the land, finding food, building materials, and
  crafting tools and devices to make your world nicer. Watch
