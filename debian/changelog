@@ -1,3 +1,16 @@
+minecraft (2) unstable; urgency=low
+
+  * Refuse client access to everything except whitelist. This prevents it from
+    harming server files, especially.
+  * Suggest tmux because peristent servers are better.
+  * Remove files before downloading. wget tries to avoid clobbering, which is
+    the wrong thing always.
+  * Apparmor pass through read request to CPU info and PCI uevent (cold plug?)
+    events.
+  * Add a application file and a icon.
+
+ -- Chad MILLER <chad.miller@canonical.com>  Mon, 11 May 2015 13:45:20 -0400
+
 minecraft (1) unstable; urgency=low
 
   * Initial release.
