@@ -5,162 +5,196 @@
 
   /usr/bin/minecraft-client r,
   /usr/bin/make ix,
+  /bin/rm ix,
   /bin/dash ix,
   /bin/mkdir ix,
   /usr/bin/wget ix,
-  /usr/lib/jvm/java-?-*/jre/bin/java ix,
   /bin/ps ix,
-  /usr/bin/xrandr ix,
-  /usr/bin/pulseaudio ix,
   deny /usr/bin/id x,
+  /usr/lib/jvm/java-?-*/jre/bin/java Cx,
 
-  network unix stream,
   network inet stream,
   network inet6 stream,
   network inet dgram,
   network inet6 dgram,
-  network netlink raw,
-
-  /sys/devices/system/cpu/ r,
-  /sys/devices/pci????:??/????:??:??.?/????:??:??.?/uevent r,
-  
-  /usr/share/java/jayatana.jar r,
-  /usr/share/java/jayatanaag.jar r,
 
   deny /usr/bin/ r,
 
-  /etc/passwd r,
   /etc/wgetrc r,
   /etc/nsswitch.conf r,
-  /etc/java-?-*/*.properties r,
   /etc/ssl/** r,
-  /etc/java-?-openjdk/jvm-amd64.cfg r,
-  /etc/lsb-release r,
-  /etc/hosts r,
-  /etc/host.conf r,
-  /etc/java-?-*/security/* r,
-  /etc/timezone r,
+  /etc/resolv.conf r,
   /run/resolvconf/resolv.conf r,
-  /etc/libnl-3/classid r,
-  /var/lib/dbus/machine-id r,
-  /etc//gai.conf r,
-
-  /usr/share/java/java-atk-wrapper.jar r,
-
-  /usr/share/icons/** r,
-
-  /tmp/hsperfdata_*/ rw,
-  /tmp/hsperfdata_*/@{pid} rw,
-
-  /tmp/imageio*.tmp rw,
-
-  /usr/share/javazi/** r,
-
-  @{PROC}/@{pid}/net/if_inet6 r,
-  @{PROC}/@{pid}/net/ipv6_route r,
-  @{PROC}/@{pid}/net/psched r,
-  @{PROC}/@{pid}/cmdline r,
-  @{PROC}/sys/net/ipv4/ip_local_port_range r,
-  @{PROC}/@{pid}/fd/ r,
-  @{PROC}/@{pid}/stat r,
-
-  /dev/dri/card* rw,
-  /etc/drirc r,
-
-  /usr/share/themes/** r,
-  /usr/share/glib-?.?/schemas/gschemas.compiled r,
-  /usr/local/share/glib-?.?/schemas/gschemas.compiled r,
-
-  /usr/share/ca-certificates/** r,
-  /etc/fonts/fonts.conf r,
-  /etc/fonts/conf.d/ r,
-  /etc/fonts/conf.d/* r,
-  @{HOME}/.java/fonts/*/*.properties r,
-  /etc/fonts/conf.avail/* r,
-  /etc/fonts/conf.avail/*.conf/ r,
-  /etc/fonts/conf.avail/*.conf/** r,
-  /usr/share/fonts/** r,
-  /usr/local/share/fonts/ r,
-  /usr/share/javascript/mathjax/fonts/HTML-CSS/TeX/otf/ r,
-  /usr/share/javascript/mathjax/fonts/HTML-CSS/TeX/otf/** r,
-  /usr/local/share/fonts/** r,
-  /usr/share/texlive/texmf-dist/fonts/** r,
-  /var/cache/fontconfig/* r,
-  /var/cache/fontconfig/** r,
-  /usr/share/texmf/fonts/** r,
-  /usr/share/fonts/ r,
-  /usr/share/poppler/** r,
-  /usr/share/fontconfig/*/* r,
-
-  dbus (send)
-    bus=session
-    path=/org/freedesktop/DBus
-    interface=org.freedesktop.DBus,
-
-  dbus (send)
-    bus=session
-    path=/org/gtk/vfs/mounttracker
-    interface=org.gtk.vfs.MountTracker,
-
-  dbus (send)
-    bus=fcitx,
-
-  @{HOME}/.netrc r,
-  @{HOME}/.config/fcitx/dbus/* r,
-
-  owner /run/user/@{pid}/dconf/user rw,
-  owner @{HOME}/.config/dconf/user r,
-
-  owner @{HOME}/.Xauthority r,
 
   owner @{HOME}/.minecraft/ rw,
   owner @{HOME}/.minecraft/client.jar rw,
-  owner @{HOME}/.minecraft/assets/ rw,
-  owner @{HOME}/.minecraft/assets/** rw,
-  owner @{HOME}/.minecraft/libraries/ rw,
-  owner @{HOME}/.minecraft/libraries/** rw,
-  owner @{HOME}/.minecraft/logs/ rw,
-  owner @{HOME}/.minecraft/logs/** rw,
-  owner @{HOME}/.minecraft/resourcepacks/ rw,
-  owner @{HOME}/.minecraft/resourcepacks/** rw,
-  owner @{HOME}/.minecraft/saves/ rw,
-  owner @{HOME}/.minecraft/saves/** rw,
-  owner @{HOME}/.minecraft/screenshots/ rw,
-  owner @{HOME}/.minecraft/screenshots/** rw,
-  owner @{HOME}/.minecraft/versions/ rw,
-  owner @{HOME}/.minecraft/versions/** rw,
-  owner @{HOME}/.minecraft/launcher.jar rw,
-  owner @{HOME}/.minecraft/launcher.pack rw,
-  owner @{HOME}/.minecraft/launcher.pack.lzma rw,
-  owner @{HOME}/.minecraft/launcher_profiles.json rw,
-  owner @{HOME}/.minecraft/OGLdpf.log rw,
-  owner @{HOME}/.minecraft/options.txt rw,
-  owner @{HOME}/.minecraft/servers.dat rw,
-  owner @{HOME}/.minecraft/usercache.json rw,
-  owner @{HOME}/.minecraft/textures_*.png rw,
 
+  /usr/share/ca-certificates/** r,
   deny /tmp/ r,
   deny /var/tmp/ r,  
 
-  /run/shm/ r,
-  /dev/shm/pulse-shm-* rw,
-  /run/shm/pulse-shm-* rw,
-  /etc/ld.so.cache r,
-  /dev/tty r,
-  /proc/uptime r,
-  /etc/udev/udev.conf r,
-  /run/udev/data/+pci:* r,
-  /etc/openal/alsoft.conf r,
-  /etc/pulse/client.conf r,
-  /usr/share/alsa/alsa.conf r,
-  
-  /lib/** r,
-  /usr/lib/** r,
-  /run/user/*/pulse/native rw,
-  /etc/machine-id r,
-  /dev/shm/ rw,
-  deny /proc/ r,
-  /proc/sys/kernel/pid_max r,
+  profile /usr/lib/jvm/*/jre/bin/java {
+    /usr/bin/xrandr ix,
+    /usr/bin/pulseaudio ix,
 
-  /tmp/libnetty-transport-native-epoll*.so rw,
+    network inet stream,
+    network inet6 stream,
+    network inet dgram,
+    network inet6 dgram,
+    network netlink raw,
+    network unix stream,
+
+    /sys/devices/system/cpu/ r,
+    /sys/devices/system/cpu/** r,
+    /sys/devices/pci????:??/????:??:??.?/????:??:??.?/uevent r,
+    /sys/devices/pci????:??/????:??:??.?/uevent r,
+    @{PROC}/@{pid}/stat r,
+    @{PROC}/stat r,
+  
+    /usr/share/icons/** r,
+
+    /tmp/imageio*.tmp rw,
+
+    /usr/share/javazi/** r,
+
+    @{PROC}/@{pid}/net/if_inet6 r,
+    @{PROC}/@{pid}/net/ipv6_route r,
+    @{PROC}/@{pid}/net/psched r,
+    @{PROC}/@{pid}/cmdline r,
+    @{PROC}/sys/net/ipv4/ip_local_port_range r,
+    @{PROC}/@{pid}/fd/ r,
+
+    /dev/dri/card* rw,
+    /etc/drirc r,
+
+    /usr/share/themes/** r,
+    /usr/share/glib-?.?/schemas/gschemas.compiled r,
+    /usr/local/share/glib-?.?/schemas/gschemas.compiled r,
+
+    /etc/passwd r,
+    /etc/host.conf r,
+    /etc/java-?-*/*.properties r,
+    /etc/java-?-openjdk/jvm-amd64.cfg r,
+    /etc/java-?-*/security/* r,
+    /etc/nsswitch.conf r,
+    /etc/ssl/** r,
+    /etc/timezone r,
+    /etc/localtime r,
+    /etc/hosts r,
+    /etc/libnl-3/classid r,
+    /etc/resolv.conf r,
+    /run/resolvconf/resolv.conf r,
+    /etc/lsb-release r,
+    /var/lib/dbus/machine-id r,
+    /etc/gai.conf r,
+
+    deny @{PROC}/@{pid}/maps r,
+
+    owner @{HOME}/.Xauthority r,
+
+    /usr/share/java/jayatana.jar r,
+    /usr/share/java/jayatanaag.jar r,
+    /usr/share/java/java-atk-wrapper.jar r,
+  
+    owner @{HOME}/.minecraft/ rw,
+    owner @{HOME}/.minecraft/client.jar r,
+    owner @{HOME}/.minecraft/assets/ rw,
+    owner @{HOME}/.minecraft/assets/** rw,
+    owner @{HOME}/.minecraft/libraries/ rw,
+    owner @{HOME}/.minecraft/libraries/** rw,
+    owner @{HOME}/.minecraft/logs/ rw,
+    owner @{HOME}/.minecraft/logs/** rw,
+    owner @{HOME}/.minecraft/resourcepacks/ rw,
+    owner @{HOME}/.minecraft/resourcepacks/** rw,
+    owner @{HOME}/.minecraft/saves/ rw,
+    owner @{HOME}/.minecraft/saves/** rw,
+    owner @{HOME}/.minecraft/screenshots/ rw,
+    owner @{HOME}/.minecraft/screenshots/** rw,
+    owner @{HOME}/.minecraft/versions/ rw,
+    owner @{HOME}/.minecraft/versions/** rw,
+    owner @{HOME}/.minecraft/launcher.jar rw,
+    owner @{HOME}/.minecraft/launcher.pack rw,
+    owner @{HOME}/.minecraft/launcher.pack.lzma rw,
+    owner @{HOME}/.minecraft/launcher.pack.lzma.new rw,
+    owner @{HOME}/.minecraft/launcher_profiles.json rw,
+    owner @{HOME}/.minecraft/OGLdpf.log rw,
+    owner @{HOME}/.minecraft/options.txt rw,
+    owner @{HOME}/.minecraft/servers.dat rw,
+    owner @{HOME}/.minecraft/usercache.json rw,
+    owner @{HOME}/.minecraft/textures_*.png rw,
+  
+    /etc/locale.alias r,
+    /usr/share/X11/locale/** r, 
+
+    /etc/fonts/fonts.conf r,
+    /etc/fonts/conf.d/ r,
+    /etc/fonts/conf.d/* r,
+    @{HOME}/.java/fonts/*/*.properties r,
+    /etc/fonts/conf.avail/* r,
+    /etc/fonts/conf.avail/*.conf/ r,
+    /etc/fonts/conf.avail/*.conf/** r,
+    /usr/share/fonts/** r,
+    /usr/local/share/fonts/ r,
+    /usr/share/javascript/mathjax/fonts/HTML-CSS/TeX/otf/ r,
+    /usr/share/javascript/mathjax/fonts/HTML-CSS/TeX/otf/** r,
+    /usr/local/share/fonts/** r,
+    /usr/share/texlive/texmf-dist/fonts/** r,
+    /var/cache/fontconfig/* r,
+    /var/cache/fontconfig/** r,
+    /usr/share/texmf/fonts/** r,
+    /usr/share/fonts/ r,
+    /usr/share/poppler/** r,
+    /usr/share/fontconfig/*/* r,
+
+    /dev/random r,
+    deny /tmp/ r,
+    deny /proc/filesystems r,
+    deny /proc/*/mounts r,
+
+    dbus (send)
+      bus=session
+      path=/org/freedesktop/DBus
+      interface=org.freedesktop.DBus,
+  
+    dbus (send)
+      bus=session
+      path=/org/gtk/vfs/mounttracker
+      interface=org.gtk.vfs.MountTracker,
+  
+    dbus (send)
+      bus=fcitx,
+  
+    @{HOME}/.netrc r,
+    @{HOME}/.config/fcitx/dbus/* r,
+  
+    owner /run/user/@{pid}/dconf/user rw,
+    owner @{HOME}/.config/dconf/user r,
+  
+    /run/shm/ r,
+    /dev/shm/pulse-shm-* rw,
+    /run/shm/pulse-shm-* rw,
+    /etc/ld.so.cache r,
+    /dev/tty r,
+    /proc/uptime r,
+    /etc/udev/udev.conf r,
+    /run/udev/data/+pci:* r,
+    /etc/openal/alsoft.conf r,
+    /etc/pulse/client.conf r,
+    /usr/share/alsa/alsa.conf r,
+    
+    /lib/** r,
+    /usr/lib/** r,
+    /run/user/*/pulse/native rw,
+    /etc/machine-id r,
+    /dev/shm/ rw,
+    deny /proc/ r,
+    @{PROC}/sys/kernel/pid_max r,
+    @{PROC}/meminfo r,
+  
+    owner /tmp/libnetty-transport-native-epoll*.so rw,
+    owner /tmp/hsperfdata_*/ rw,
+    owner /tmp/hsperfdata_*/@{pid} rw,
+
+
+  }
 }

@@ -1,3 +1,10 @@
+minecraft (3) unstable; urgency=low
+
+  * More specifically constrain java in a subprofile to reduce attack surface.
+  * Fix the server downloading freshness test.
+
+ -- Chad MILLER <chad.miller@canonical.com>  Wed, 13 May 2015 08:02:43 -0400
+
 minecraft (2) unstable; urgency=low
 
   * Refuse client access to everything except whitelist. This prevents it from

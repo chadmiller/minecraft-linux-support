@@ -7,28 +7,27 @@
 
   deny /usr/bin/ r,
 
+  /usr/bin/make ix,
   /usr/bin/wget ix,
   /bin/mkdir ix,
+  /bin/touch ix,
+  /bin/rm ix,
   /usr/bin/python3 ix,
   /usr/bin/python3.* ix,
-  /usr/lib/jvm/*/jre/bin/java ix,
   /bin/dash ix,
-  /usr/bin/make ix,
+  /usr/lib/jvm/*/jre/bin/java Cx,
 
   /etc/wgetrc r,
   owner @{HOME}/.netrc r,
   /usr/share/ca-certificates/** r,
 
-  /etc/java-8-openjdk/jvm-amd64.cfg r,
-
+  deny @{PROC}/@{pid}/sys/devices/system/cpu/ r,
   deny /sys/devices/system/cpu/ r,
 
-  network inet dgram,
   network inet stream,
+  network inet dgram,
   network inet6 dgram,
   network inet6 stream,
-  network netlink raw,
-
 
   deny /usr/bin/id x,
   deny /etc/passwd r,
@@ -39,35 +38,47 @@
   /etc/ssl/** r,
   /etc/timezone r,
   /run/resolvconf/resolv.conf r,
+  owner @{HOME}/.minecraft/ rw,
 
   deny /usr/local/lib/python3.*/dist-packages/ r,
   deny @{HOME} r,
 
-  /etc/java-8-*/security/* r,
-  /etc/java-8-*/*.properties r,
+  owner @{HOME}/.minecraft/server.jar rw,
+  owner @{HOME}/.minecraft/server.jar.freshness w,
 
-  /usr/share/java/jayatana.jar r,
-  /usr/share/java/jayatanaag.jar r,
-  /usr/share/java/java-atk-wrapper.jar r,
+  profile /usr/lib/jvm/*/jre/bin/java {
+    network inet stream,
+    network inet dgram,
+    network inet6 dgram,
+    network inet6 stream,
+    network netlink raw,
 
-  owner @{HOME}/.minecraft/server.jar r,
-  owner @{HOME}/.minecraft/eula.txt r,
-  owner @{HOME}/.minecraft/ rw,
-  @{HOME}/.minecraft/server.properties rw,
-  owner @{HOME}/.minecraft/*.json rw,
-  @{HOME}/.minecraft/logs/ w,
-  @{HOME}/.minecraft/logs/*.log* rw,
-  @{HOME}/.minecraft/server.jar rw,
-  @{HOME}/.minecraft/server.jar.freshness w,
-  @{HOME}/.minecraft/eula.txt w,
+    /etc/java-?-*/jvm-*.cfg r,
+    /etc/java-?-*/security/* r,
+    /etc/java-?-*/*.properties r,
 
-  # require all "level-name" values in server.properties to start with world
-  @{HOME}/.minecraft/world*/** rw,
+    owner @{HOME}/.minecraft/server.jar r,
+    /usr/share/java/jayatana.jar r,
+    /usr/share/java/jayatanaag.jar r,
+    /usr/share/java/java-atk-wrapper.jar r,
 
-  @{PROC}/@{pid}/net/ipv6_route r,
-  @{PROC}/@{pid}/net/if_inet6 r,
-  @{PROC}/@{pid}/fd/ r,
-  @{PROC}/sys/net/core/somaxconn r,
-
-  owner /tmp/libnetty-transport-native-epoll*.so rw,
+    owner @{HOME}/.minecraft/ rw,
+    owner @{HOME}/.minecraft/eula.txt r,
+    @{HOME}/.minecraft/server.properties rw,
+    owner @{HOME}/.minecraft/*.json rw,
+    @{HOME}/.minecraft/logs/ w,
+    @{HOME}/.minecraft/logs/*.log* rw,
+    @{HOME}/.minecraft/eula.txt w,
+  
+    # require all "level-name" values in server.properties to start with world
+    @{HOME}/.minecraft/world*/ rw,
+    @{HOME}/.minecraft/world*/** rw,
+  
+    @{PROC}/@{pid}/net/ipv6_route r,
+    @{PROC}/@{pid}/net/if_inet6 r,
+    @{PROC}/@{pid}/fd/ r,
+    @{PROC}/sys/net/core/somaxconn r,
+  
+    owner /tmp/libnetty-transport-native-epoll*.so rw,
+  }
 }
