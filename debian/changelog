@@ -1,3 +1,9 @@
+minecraft (4) unstable; urgency=low
+
+  * Many additions to server profile.
+
+ -- Chad MILLER <chad.miller@canonical.com>  Wed, 13 May 2015 22:08:13 -0400
+
 minecraft (3) unstable; urgency=low
 
   * More specifically constrain java in a subprofile to reduce attack surface.

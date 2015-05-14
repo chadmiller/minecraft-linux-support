@@ -2,6 +2,9 @@
 
 /usr/bin/minecraft-client {
   #include <abstractions/base>
+  #include <abstractions/ssl_certs>
+  #include <abstractions/openssl>
+  #include <abstractions/nameservice>
 
   /usr/bin/minecraft-client r,
   /usr/bin/make ix,
@@ -21,21 +24,20 @@
   deny /usr/bin/ r,
 
   /etc/wgetrc r,
-  /etc/nsswitch.conf r,
-  /etc/ssl/** r,
-  /etc/resolv.conf r,
-  /run/resolvconf/resolv.conf r,
-
   owner @{HOME}/.minecraft/ rw,
   owner @{HOME}/.minecraft/client.jar rw,
 
-  /usr/share/ca-certificates/** r,
-  deny /tmp/ r,
-  deny /var/tmp/ r,  
+  profile /usr/lib/jvm/*/jre/bin/java flags=(complain) {
+    #include <abstractions/ssl_certs>
+    #include <abstractions/nameservice>
+    #include <abstractions/audio>
+    #include <abstractions/X>
+    #include <abstractions/fonts>
 
-  profile /usr/lib/jvm/*/jre/bin/java {
     /usr/bin/xrandr ix,
-    /usr/bin/pulseaudio ix,
+    /usr/bin/id ix,
+    /bin/ps ix,
+    /usr/lib/jvm/*/jre/bin/java ix,  # the launcher execs java to run the real client.
 
     network inet stream,
     network inet6 stream,
@@ -43,6 +45,10 @@
     network inet6 dgram,
     network netlink raw,
     network unix stream,
+
+    signal (receive) peer=unconfined,
+    signal (send, receive) peer=@{profile_name},
+    signal (send) set=("exists"),
 
     /sys/devices/system/cpu/ r,
     /sys/devices/system/cpu/** r,
@@ -63,6 +69,7 @@
     @{PROC}/@{pid}/cmdline r,
     @{PROC}/sys/net/ipv4/ip_local_port_range r,
     @{PROC}/@{pid}/fd/ r,
+    deny @{PROC}/ r,
 
     /dev/dri/card* rw,
     /etc/drirc r,
@@ -82,15 +89,11 @@
     /etc/localtime r,
     /etc/hosts r,
     /etc/libnl-3/classid r,
-    /etc/resolv.conf r,
-    /run/resolvconf/resolv.conf r,
     /etc/lsb-release r,
     /var/lib/dbus/machine-id r,
     /etc/gai.conf r,
 
     deny @{PROC}/@{pid}/maps r,
-
-    owner @{HOME}/.Xauthority r,
 
     /usr/share/java/jayatana.jar r,
     /usr/share/java/jayatanaag.jar r,
@@ -119,37 +122,25 @@
     owner @{HOME}/.minecraft/launcher_profiles.json rw,
     owner @{HOME}/.minecraft/OGLdpf.log rw,
     owner @{HOME}/.minecraft/options.txt rw,
-    owner @{HOME}/.minecraft/servers.dat rw,
-    owner @{HOME}/.minecraft/usercache.json rw,
+    owner @{HOME}/.minecraft/servers.dat* rw,
+    owner @{HOME}/.minecraft/usercache.json* rw,
     owner @{HOME}/.minecraft/textures_*.png rw,
+
+    owner @{HOME}/.java/ rw,
+    owner @{HOME}/.java/** rw,
   
     /etc/locale.alias r,
     /usr/share/X11/locale/** r, 
 
-    /etc/fonts/fonts.conf r,
-    /etc/fonts/conf.d/ r,
-    /etc/fonts/conf.d/* r,
-    @{HOME}/.java/fonts/*/*.properties r,
-    /etc/fonts/conf.avail/* r,
-    /etc/fonts/conf.avail/*.conf/ r,
-    /etc/fonts/conf.avail/*.conf/** r,
-    /usr/share/fonts/** r,
-    /usr/local/share/fonts/ r,
-    /usr/share/javascript/mathjax/fonts/HTML-CSS/TeX/otf/ r,
-    /usr/share/javascript/mathjax/fonts/HTML-CSS/TeX/otf/** r,
-    /usr/local/share/fonts/** r,
-    /usr/share/texlive/texmf-dist/fonts/** r,
-    /var/cache/fontconfig/* r,
-    /var/cache/fontconfig/** r,
-    /usr/share/texmf/fonts/** r,
-    /usr/share/fonts/ r,
-    /usr/share/poppler/** r,
-    /usr/share/fontconfig/*/* r,
-
     /dev/random r,
-    deny /tmp/ r,
+    /dev/urandom r,
+    #deny /tmp/ r,
     deny /proc/filesystems r,
     deny /proc/*/mounts r,
+
+    /proc/uptime r,
+    /proc/cpuinfo r,
+    /proc/sys/vm/overcommit_memory r,
 
     dbus (send)
       bus=session
@@ -170,31 +161,17 @@
     owner /run/user/@{pid}/dconf/user rw,
     owner @{HOME}/.config/dconf/user r,
   
-    /run/shm/ r,
-    /dev/shm/pulse-shm-* rw,
-    /run/shm/pulse-shm-* rw,
-    /etc/ld.so.cache r,
-    /dev/tty r,
-    /proc/uptime r,
-    /etc/udev/udev.conf r,
-    /run/udev/data/+pci:* r,
-    /etc/openal/alsoft.conf r,
-    /etc/pulse/client.conf r,
-    /usr/share/alsa/alsa.conf r,
-    
+	/etc/ld.so.cache r,
     /lib/** r,
     /usr/lib/** r,
-    /run/user/*/pulse/native rw,
     /etc/machine-id r,
     /dev/shm/ rw,
-    deny /proc/ r,
+    #deny /proc/ r,
     @{PROC}/sys/kernel/pid_max r,
     @{PROC}/meminfo r,
   
     owner /tmp/libnetty-transport-native-epoll*.so rw,
     owner /tmp/hsperfdata_*/ rw,
     owner /tmp/hsperfdata_*/@{pid} rw,
-
-
   }
 }

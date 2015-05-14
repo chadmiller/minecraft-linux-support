@@ -2,6 +2,10 @@
 
 /usr/bin/minecraft-server {
   #include <abstractions/base>
+  #include <abstractions/ssl_certs>
+  #include <abstractions/openssl>
+  #include <abstractions/python>
+  #include <abstractions/nameservice>
 
   /usr/bin/minecraft-server r,
 
@@ -19,7 +23,6 @@
 
   /etc/wgetrc r,
   owner @{HOME}/.netrc r,
-  /usr/share/ca-certificates/** r,
 
   deny @{PROC}/@{pid}/sys/devices/system/cpu/ r,
   deny /sys/devices/system/cpu/ r,
@@ -29,38 +32,102 @@
   network inet6 dgram,
   network inet6 stream,
 
+  deny /usr/lib/python*/dist-packages/apport_python_hook.py r,
+
   deny /usr/bin/id x,
   deny /etc/passwd r,
-  /etc/gai.conf r,
-  /etc/host.conf r,
   /etc/hosts r,
-  /etc/nsswitch.conf r,
-  /etc/ssl/** r,
   /etc/timezone r,
-  /run/resolvconf/resolv.conf r,
-  owner @{HOME}/.minecraft/ rw,
 
-  deny /usr/local/lib/python3.*/dist-packages/ r,
   deny @{HOME} r,
-
+  owner @{HOME}/.minecraft/ rw,
   owner @{HOME}/.minecraft/server.jar rw,
   owner @{HOME}/.minecraft/server.jar.freshness w,
 
-  profile /usr/lib/jvm/*/jre/bin/java {
+  profile /usr/lib/jvm/java-*/jre/bin/java flags=(complain) {
+    #include <abstractions/ssl_certs>
+	
+    /usr/bin/id ix,
+
     network inet stream,
     network inet dgram,
     network inet6 dgram,
     network inet6 stream,
     network netlink raw,
+    network unix stream,
 
+    signal (receive) peer=unconfined,
+    signal (send, receive) peer=@{profile_name},
+
+    /proc/meminfo r,
+    /proc/cpuinfo r,
+    /proc/stat r,
+    /proc/@{pid}/maps r,
+    /proc/@{pid}/mounts r,
+    /sys/devices/system/cpu/online r,
+    /sys/devices/system/cpu/ r,
+
+    /dev/random r,
+    /dev/urandom r,
+
+    /usr/lib/jvm/java-*/jre/bin/java r,
+ 
     /etc/java-?-*/jvm-*.cfg r,
     /etc/java-?-*/security/* r,
     /etc/java-?-*/*.properties r,
+    /etc/ld.so.cache r,
+    /etc/nsswitch.conf r,
+    /etc/localtime r,
+    /etc/timezone r,
+    /etc/passwd r,
+    /etc/gai.conf r,
+    /etc/locale.alias r,
+    /usr/lib/locale/locale-archive r,
+    /etc/host.conf r,
+    /etc/resolv.conf r,
+    /run/resolvconf/resolv.conf r,
+    /etc/hosts r,
 
     owner @{HOME}/.minecraft/server.jar r,
     /usr/share/java/jayatana.jar r,
     /usr/share/java/jayatanaag.jar r,
+    /usr/lib/jayatana/lib*.so r,
     /usr/share/java/java-atk-wrapper.jar r,
+    /usr/lib/jvm/java-*/jre/lib/meta-index r,
+    /usr/lib/jvm/java-*/jre/lib/*.jar r,
+    /usr/lib/jvm/java-*/jre/lib/ext/ r,
+    /usr/lib/jvm/java-*/jre/lib/ext/*.jar r,
+    /usr/lib/jvm/java-*/jre/lib/tzdb.dat r,
+    /usr/lib/jvm/java-*/jre/lib/currency.data r,
+    /usr/lib/jvm/java-*/jre/lib/security/*.jar r,
+
+    /lib/*/ld-*.so r,
+    /lib/*/libc-*.so r,
+    /lib/*/libz.so* r,
+    /lib/*/libdl-*.so r,
+    /lib/*/libm-*.so r,
+    /lib/*/librt-*.so r,
+    /lib/*/libpthread-*.so r,
+    /lib/*/libgcc_s.so.* r,
+    /lib/*/libnsl-2.21.so r,
+    /lib/*/libnss_files-*.so r,
+    /lib/*/libnss_compat-*.so r,
+    /lib/*/libnss_nis-*.so r,
+    /lib/*/libnss_mdns*_minimal.so.* r,
+    /lib/*/libnss_dns-*.so r,
+    /lib/*/libresolv-*.so r,
+    /usr/lib/*/libX11.so.* r,
+    /usr/lib/*/libXau.so.* r,
+    /usr/lib/*/libXdmcp.so.* r,
+    /usr/lib/*/libxcb.so.* r,
+    /usr/lib/*/libstdc++.so.* r,
+    /usr/lib/*/libXext.so.* r,
+    /usr/lib/*/libXrender.so.* r,
+    /usr/lib/*/libXtst.so.* r,
+    /usr/lib/*/jni/libatk-wrapper.so.* r,
+    /usr/lib/jvm/java-*/jre/lib/*/server/libjvm.so r,
+    /usr/lib/jvm/java-*/jre/lib/*/lib*.so r,
+    /usr/lib/jvm/java-*/jre/lib/*/jli/lib*.so r,
 
     owner @{HOME}/.minecraft/ rw,
     owner @{HOME}/.minecraft/eula.txt r,
@@ -80,5 +147,6 @@
     @{PROC}/sys/net/core/somaxconn r,
   
     owner /tmp/libnetty-transport-native-epoll*.so rw,
+    deny /tmp/hsperfdata_*/ r,
   }
 }
