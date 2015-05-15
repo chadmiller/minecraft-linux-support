@@ -17,12 +17,10 @@ or
 
 will be perfect for you. Commits into Github percolate to that PPA in hours.
 
-Install these files in the appropriate locations. Then,
+If you are not lucky enough to use Debian based distro, you can instead install these files in the appropriate locations. Then,
 
-    $ sudo apparmor_parser -a /usr/bin/minecraft-server
-    $ sudo apparmor_parser -a /usr/bin/minecraft-client
-    $ sudo aa-enforce /usr/bin/minecraft-server
-    $ sudo aa-enforce /usr/bin/minecraft-client
+    $ sudo apparmor_parser -a /etc/apparmor.d/usr.bin/minecraft-{server,client}
+    $ sudo aa-enforce /usr/bin/minecraft-{server,client}
 
 After the first time, you don't have to do these.
 
