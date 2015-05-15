@@ -1,3 +1,11 @@
+minecraft (20150515) unstable; urgency=low
+
+  * Clean up apparmor files. Whitespace. Consolidation.
+  * Make restrictive again. Debugging phase done.
+  * Require all .minecraft files be owned by euid.
+
+ -- Chad MILLER <chad.miller@canonical.com>  Fri, 15 May 2015 09:13:40 -0400
+
 minecraft (5) unstable; urgency=low
 
   * Add some nameservice and signal missing rules.

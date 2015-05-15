@@ -19,7 +19,7 @@
   /usr/bin/python3 ix,
   /usr/bin/python3.* ix,
   /bin/dash ix,
-  /usr/lib/jvm/*/jre/bin/java Cx,
+  /usr/lib/jvm/java-*-*/jre/bin/java Cx,
 
   /etc/wgetrc r,
   owner @{HOME}/.netrc r,
@@ -44,10 +44,10 @@
   owner @{HOME}/.minecraft/server.jar rw,
   owner @{HOME}/.minecraft/server.jar.freshness w,
 
-  profile /usr/lib/jvm/java-*/jre/bin/java flags=(complain) {
+  profile /usr/lib/jvm/java-*-*/jre/bin/java {
     #include <abstractions/ssl_certs>
     #include <abstractions/nameservice>
-	
+
     /usr/bin/id ix,
 
     network inet stream,
@@ -75,37 +75,30 @@
     /lib/x86_64-linux-gnu/libselinux.so.* r,
     /lib/x86_64-linux-gnu/libpcre.so.* r,
 
-    /usr/lib/jvm/java-*/jre/bin/java r,
- 
+    /usr/lib/jvm/java-*-*/jre/bin/java r,
+
     /etc/ssl/certs/java/cacerts r,
-    /etc/java-?-*/jvm-*.cfg r,
-    /etc/java-?-*/security/* r,
-    /etc/java-?-*/*.properties r,
+    /etc/java-*-*/jvm-*.cfg r,
+    /etc/java-*-*/security/* r,
+    /etc/java-*-*/*.properties r,
     /etc/ld.so.cache r,
-    #/etc/nsswitch.conf r,
     /etc/localtime r,
     /etc/timezone r,
-    #/etc/passwd r,
-    #/etc/gai.conf r,
     /etc/locale.alias r,
     /usr/lib/locale/locale-archive r,
-    #/etc/host.conf r,
-    #/etc/resolv.conf r,
-    #/run/resolvconf/resolv.conf r,
-    #/etc/hosts r,
 
     owner @{HOME}/.minecraft/server.jar r,
     /usr/share/java/jayatana.jar r,
     /usr/share/java/jayatanaag.jar r,
     /usr/lib/jayatana/lib*.so r,
     /usr/share/java/java-atk-wrapper.jar r,
-    /usr/lib/jvm/java-*/jre/lib/meta-index r,
-    /usr/lib/jvm/java-*/jre/lib/*.jar r,
-    /usr/lib/jvm/java-*/jre/lib/ext/ r,
-    /usr/lib/jvm/java-*/jre/lib/ext/*.jar r,
-    /usr/lib/jvm/java-*/jre/lib/tzdb.dat r,
-    /usr/lib/jvm/java-*/jre/lib/currency.data r,
-    /usr/lib/jvm/java-*/jre/lib/security/*.jar r,
+    /usr/lib/jvm/java-*-*/jre/lib/meta-index r,
+    /usr/lib/jvm/java-*-*/jre/lib/*.jar r,
+    /usr/lib/jvm/java-*-*/jre/lib/ext/ r,
+    /usr/lib/jvm/java-*-*/jre/lib/ext/*.jar r,
+    /usr/lib/jvm/java-*-*/jre/lib/tzdb.dat r,
+    /usr/lib/jvm/java-*-*/jre/lib/currency.data r,
+    /usr/lib/jvm/java-*-*/jre/lib/security/*.jar r,
 
     /lib/*/ld-*.so r,
     /lib/*/libc-*.so r,
@@ -132,27 +125,26 @@
     /usr/lib/*/libXrender.so.* r,
     /usr/lib/*/libXtst.so.* r,
     /usr/lib/*/jni/libatk-wrapper.so.* r,
-    /usr/lib/jvm/java-*/jre/lib/*/server/libjvm.so r,
-    /usr/lib/jvm/java-*/jre/lib/*/lib*.so r,
-    /usr/lib/jvm/java-*/jre/lib/*/jli/lib*.so r,
+    /usr/lib/jvm/java-*-*/jre/lib/*/server/libjvm.so r,
+    /usr/lib/jvm/java-*-*/jre/lib/*/lib*.so r,
+    /usr/lib/jvm/java-*-*/jre/lib/*/jli/lib*.so r,
 
     owner @{HOME}/.minecraft/ rw,
-    owner @{HOME}/.minecraft/eula.txt r,
-    @{HOME}/.minecraft/server.properties rw,
+    owner @{HOME}/.minecraft/eula.txt rw,
+    owner @{HOME}/.minecraft/server.properties rw,
     owner @{HOME}/.minecraft/*.json rw,
-    @{HOME}/.minecraft/logs/ w,
-    @{HOME}/.minecraft/logs/*.log* rw,
-    @{HOME}/.minecraft/eula.txt w,
-  
+    owner @{HOME}/.minecraft/logs/ w,
+    owner @{HOME}/.minecraft/logs/*.log* rw,
+
     # require all "level-name" values in server.properties to start with world
-    @{HOME}/.minecraft/world*/ rw,
-    @{HOME}/.minecraft/world*/** rw,
-  
+    owner @{HOME}/.minecraft/world*/ rw,
+    owner @{HOME}/.minecraft/world*/** rw,
+
     @{PROC}/@{pid}/net/ipv6_route r,
     @{PROC}/@{pid}/net/if_inet6 r,
     @{PROC}/@{pid}/fd/ r,
     @{PROC}/sys/net/core/somaxconn r,
-  
+
     owner /tmp/libnetty-transport-native-epoll*.so rw,
     deny /tmp/hsperfdata_*/ r,
     deny /tmp/hsperfdata_*/* r,

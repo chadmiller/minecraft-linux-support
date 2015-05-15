@@ -14,7 +14,7 @@
   /usr/bin/wget ix,
   /bin/ps ix,
   deny /usr/bin/id x,
-  /usr/lib/jvm/java-?-*/jre/bin/java Cx,
+  /usr/lib/jvm/java-*-*/jre/bin/java Cx,
 
   network inet stream,
   network inet6 stream,
@@ -27,7 +27,7 @@
   owner @{HOME}/.minecraft/ rw,
   owner @{HOME}/.minecraft/client.jar rw,
 
-  profile /usr/lib/jvm/*/jre/bin/java flags=(complain) {
+  profile /usr/lib/jvm/java-*-*/jre/bin/java {
     #include <abstractions/ssl_certs>
     #include <abstractions/nameservice>
     #include <abstractions/audio>
@@ -37,7 +37,7 @@
     /usr/bin/xrandr ix,
     /usr/bin/id ix,
     /bin/ps ix,
-    /usr/lib/jvm/*/jre/bin/java ix,  # the launcher execs java to run the real client.
+    /usr/lib/jvm/java-*-*/jre/bin/java ix,  # the launcher execs java to run the real client.
 
     network inet stream,
     network inet6 stream,
@@ -52,11 +52,11 @@
 
     /sys/devices/system/cpu/ r,
     /sys/devices/system/cpu/** r,
-    /sys/devices/pci????:??/????:??:??.?/????:??:??.?/uevent r,
-    /sys/devices/pci????:??/????:??:??.?/uevent r,
+    /sys/devices/pci????:??/????:??:??.*/????:??:??.*/uevent r,
+    /sys/devices/pci????:??/????:??:??.*/uevent r,
     @{PROC}/@{pid}/stat r,
     @{PROC}/stat r,
-  
+
     /usr/share/icons/** r,
 
     /tmp/imageio*.tmp rw,
@@ -75,14 +75,14 @@
     /etc/drirc r,
 
     /usr/share/themes/** r,
-    /usr/share/glib-?.?/schemas/gschemas.compiled r,
-    /usr/local/share/glib-?.?/schemas/gschemas.compiled r,
+    /usr/share/glib-?.*/schemas/gschemas.compiled r,
+    /usr/local/share/glib-?.*/schemas/gschemas.compiled r,
 
     /etc/passwd r,
     /etc/host.conf r,
-    /etc/java-?-*/*.properties r,
-    /etc/java-?-openjdk/jvm-amd64.cfg r,
-    /etc/java-?-*/security/* r,
+    /etc/java-*-*/*.properties r,
+    /etc/java-*-openjdk/jvm-*.cfg r,
+    /etc/java-*-*/security/* r,
     /etc/nsswitch.conf r,
     /etc/ssl/** r,
     /etc/timezone r,
@@ -98,7 +98,7 @@
     /usr/share/java/jayatana.jar r,
     /usr/share/java/jayatanaag.jar r,
     /usr/share/java/java-atk-wrapper.jar r,
-  
+
     owner @{HOME}/.minecraft/ rw,
     owner @{HOME}/.minecraft/client.jar r,
     owner @{HOME}/.minecraft/assets/ rw,
@@ -128,13 +128,12 @@
 
     owner @{HOME}/.java/ rw,
     owner @{HOME}/.java/** rw,
-  
+
     /etc/locale.alias r,
-    /usr/share/X11/locale/** r, 
+    /usr/share/X11/locale/** r,
 
     /dev/random r,
     /dev/urandom r,
-    #deny /tmp/ r,
     deny /proc/filesystems r,
     deny /proc/*/mounts r,
 
@@ -146,22 +145,22 @@
       bus=session
       path=/org/freedesktop/DBus
       interface=org.freedesktop.DBus,
-  
+
     dbus (send)
       bus=session
       path=/org/gtk/vfs/mounttracker
       interface=org.gtk.vfs.MountTracker,
-  
+
     dbus (send)
       bus=fcitx,
-  
-    @{HOME}/.netrc r,
-    @{HOME}/.config/fcitx/dbus/* r,
-  
+
+    owner @{HOME}/.netrc r,
+    owner @{HOME}/.config/fcitx/dbus/* r,
+
     owner /run/user/@{pid}/dconf/user rw,
     owner @{HOME}/.config/dconf/user r,
-  
-	/etc/ld.so.cache r,
+
+    /etc/ld.so.cache r,
     /lib/** r,
     /usr/lib/** r,
     /etc/machine-id r,
@@ -169,7 +168,7 @@
     #deny /proc/ r,
     @{PROC}/sys/kernel/pid_max r,
     @{PROC}/meminfo r,
-  
+
     owner /tmp/libnetty-transport-native-epoll*.so rw,
     owner /tmp/hsperfdata_*/ rw,
     owner /tmp/hsperfdata_*/@{pid} rw,
