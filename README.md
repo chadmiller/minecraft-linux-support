@@ -8,9 +8,13 @@ from a script that is constrained by Linux's apparmor.
 
 If you use Ubuntu or Debian, and only wish to use these startup scripts and 
 security profiles, then the personal package archive at
-https://code.launchpad.net/~cmiller/+archive/ubuntu/ppa
+
+    https://code.launchpad.net/~cmiller/+archive/ubuntu/ppa
+
 or 
-ppa:cmiller/ppa
+
+    ppa:cmiller/ppa
+
 will be perfect for you. Commits into Github percolate to that PPA in hours.
 
 Install these files in the appropriate locations. Then,
