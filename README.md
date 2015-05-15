@@ -6,8 +6,14 @@ worries me.
 You can mitigate some of that craziness by running minecraft java instances
 from a script that is constrained by Linux's apparmor.
 
-Install these files in the appropriate locations. Then,
+If you use Ubuntu or Debian, and only wish to use these startup scripts and 
+security profiles, then the personal package archive at
+https://code.launchpad.net/~cmiller/+archive/ubuntu/ppa
+or 
+ppa:cmiller/ppa
+will be perfect for you. Commits into Github percolate to that PPA in hours.
 
+Install these files in the appropriate locations. Then,
 
     $ sudo apparmor_parser -a /usr/bin/minecraft-server
     $ sudo apparmor_parser -a /usr/bin/minecraft-client
