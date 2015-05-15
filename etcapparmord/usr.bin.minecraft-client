@@ -48,7 +48,7 @@
 
     signal (receive) peer=unconfined,
     signal (send, receive) peer=@{profile_name},
-    signal (send) set=("exists"),
+    signal (send, receive) set=("exists"),
 
     /sys/devices/system/cpu/ r,
     /sys/devices/system/cpu/** r,

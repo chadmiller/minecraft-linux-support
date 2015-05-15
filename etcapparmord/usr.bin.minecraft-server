@@ -46,6 +46,7 @@
 
   profile /usr/lib/jvm/java-*/jre/bin/java flags=(complain) {
     #include <abstractions/ssl_certs>
+    #include <abstractions/nameservice>
 	
     /usr/bin/id ix,
 
@@ -58,6 +59,7 @@
 
     signal (receive) peer=unconfined,
     signal (send, receive) peer=@{profile_name},
+    signal (receive) set=("exists"),
 
     /proc/meminfo r,
     /proc/cpuinfo r,
@@ -70,23 +72,27 @@
     /dev/random r,
     /dev/urandom r,
 
+    /lib/x86_64-linux-gnu/libselinux.so.* r,
+    /lib/x86_64-linux-gnu/libpcre.so.* r,
+
     /usr/lib/jvm/java-*/jre/bin/java r,
  
+    /etc/ssl/certs/java/cacerts r,
     /etc/java-?-*/jvm-*.cfg r,
     /etc/java-?-*/security/* r,
     /etc/java-?-*/*.properties r,
     /etc/ld.so.cache r,
-    /etc/nsswitch.conf r,
+    #/etc/nsswitch.conf r,
     /etc/localtime r,
     /etc/timezone r,
-    /etc/passwd r,
-    /etc/gai.conf r,
+    #/etc/passwd r,
+    #/etc/gai.conf r,
     /etc/locale.alias r,
     /usr/lib/locale/locale-archive r,
-    /etc/host.conf r,
-    /etc/resolv.conf r,
-    /run/resolvconf/resolv.conf r,
-    /etc/hosts r,
+    #/etc/host.conf r,
+    #/etc/resolv.conf r,
+    #/run/resolvconf/resolv.conf r,
+    #/etc/hosts r,
 
     owner @{HOME}/.minecraft/server.jar r,
     /usr/share/java/jayatana.jar r,
@@ -116,6 +122,7 @@
     /lib/*/libnss_mdns*_minimal.so.* r,
     /lib/*/libnss_dns-*.so r,
     /lib/*/libresolv-*.so r,
+    /usr/lib/*/libXi.so.* r,
     /usr/lib/*/libX11.so.* r,
     /usr/lib/*/libXau.so.* r,
     /usr/lib/*/libXdmcp.so.* r,
@@ -148,5 +155,6 @@
   
     owner /tmp/libnetty-transport-native-epoll*.so rw,
     deny /tmp/hsperfdata_*/ r,
+    deny /tmp/hsperfdata_*/* r,
   }
 }
