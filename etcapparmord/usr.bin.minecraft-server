@@ -33,6 +33,7 @@
   network inet6 stream,
 
   deny /usr/lib/python*/dist-packages/apport_python_hook.py r,
+  deny /etc/apparmor.d/ r,
 
   deny /usr/bin/id x,
   deny /etc/passwd r,
@@ -63,6 +64,7 @@
 
     /proc/meminfo r,
     /proc/cpuinfo r,
+    /proc/filesystems r,
     /proc/stat r,
     /proc/@{pid}/maps r,
     /proc/@{pid}/mounts r,
