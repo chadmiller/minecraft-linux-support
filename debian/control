@@ -13,7 +13,7 @@ Architecture: all
 Depends: ${misc:Depends}, 
   make,
   wget, ca-certificates,
-  openjdk-8-jdk | java8-jdk,
+  openjdk-8-jre | default-jre | java8-jre,
   jayatana,
   python3-minimal | python3
 Recommends: apparmor
