@@ -4,10 +4,10 @@ set -e
 
 if apparmor_status --enabled; then
 	for name in server client; do
-		if apparmor_status |grep /usr/bin/minecraft-$name; then
-			apparmor_parser -a /etc/apparmor.d/usr.bin.minecraft-$name
-		else
+		if apparmor_status |grep "^   /usr/bin/minecraft-$name\$"; then
 			apparmor_parser -r /etc/apparmor.d/usr.bin.minecraft-$name
+		else
+			apparmor_parser -a /etc/apparmor.d/usr.bin.minecraft-$name
 		fi
 	done
 fi
