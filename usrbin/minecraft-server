@@ -5,19 +5,20 @@ RELEASE_INFO_URL := https://s3.amazonaws.com/Minecraft.Download/versions/version
 NOISE := $(shell touch --date "now - 30 days" "$(JARFILE).freshness")
 
 run: $(JARFILE)
-	cd "$(dir $<)" && exec java -Xmx1024M -Xms1024M -jar "$(JARFILE)" nogui
+	@test "$$TMUX" || { echo "You should perhaps run this inside tmux."; echo "$$ tmux new -s minecraft"; echo; }
+	@cd "$(dir $<)" && exec java -Xmx1024M -Xms1024M -jar "$(JARFILE)" nogui
 
 $(JARFILE):: VER := $(shell wget -q -O - $(RELEASE_INFO_URL) |python3 -c 'import json, sys; print(json.load(sys.stdin)["latest"]["release"])')
 $(JARFILE):: $(JARFILE).freshness
-	test "$(VER)"
-	mkdir -p "$(dir $@)"
+	@test "$(VER)"
+	@mkdir -p "$(dir $@)"
 
 	rm -f "$@"; wget -O "$@" --progress=dot:mega "https://s3.amazonaws.com/Minecraft.Download/versions/$(VER)/minecraft_server.$(VER).jar"
 
 $(JARFILE).freshness::
-	mkdir -p "$(dir $@)"
-	echo "The timestamp of this file is used to mark when the server jar should be considered old." >"$@"
-	touch --date "now - 30 days" "$@"
+	@mkdir -p "$(dir $@)"
+	@echo "The timestamp of this file is used to mark when the server jar should be considered old." >"$@"
+	@touch --date "now - 30 days" "$@"
 
 .SECONDARY: $(JARFILE) $(JARFILE).freshness
 
