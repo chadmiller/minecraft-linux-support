@@ -148,7 +148,7 @@
     @{PROC}/sys/net/core/somaxconn r,
 
     owner /tmp/libnetty-transport-native-epoll*.so rw,
-    deny /tmp/hsperfdata_*/ r,
-    deny /tmp/hsperfdata_*/* r,
+    deny /tmp/hsperfdata_*/ rw,
+    deny /tmp/hsperfdata_*/* rw,
   }
 }
