@@ -131,7 +131,7 @@
     /usr/lib/jvm/java-*-*/jre/lib/*/lib*.so r,
     /usr/lib/jvm/java-*-*/jre/lib/*/jli/lib*.so r,
 
-    owner @{HOME}/.minecraft/ rw,
+    @{HOME}/.minecraft/ rw,
     owner @{HOME}/.minecraft/eula.txt rw,
     owner @{HOME}/.minecraft/server.properties rw,
     owner @{HOME}/.minecraft/*.json rw,
