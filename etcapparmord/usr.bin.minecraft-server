@@ -60,6 +60,7 @@
     network unix stream,
 
     signal (receive) peer=unconfined,
+    signal (receive) peer=/usr/bin/minecraft-server,
     signal (send, receive) peer=@{profile_name},
     signal (receive) set=("exists"),
 
@@ -91,7 +92,6 @@
     /usr/lib/locale/locale-archive r,
     /usr/share/javazi/* r,
 
-
     owner @{HOME}/.minecraft/server.jar r,
     /usr/share/java/jayatana.jar r,
     /usr/share/java/jayatanaag.jar r,
@@ -122,6 +122,8 @@
     /lib/*/libnss_dns-*.so r,
     /lib/*/libresolv-*.so r,
     /lib/*/libglib-2.0.so.* r,
+    /usr/lib/*/libnss3.so r,
+    /usr/lib/*/libnssutil3.so r,
     /usr/lib/*/libffi.so.* r,
     /usr/lib/*/libXi.so.* r,
     /usr/lib/*/libX11.so.* r,
@@ -135,6 +137,11 @@
     /usr/lib/*/libgio-2.0.so.* r,
     /usr/lib/*/libgobject-2.0.so.* r,
     /usr/lib/*/libgmodule-2.0.so.* r,
+    /usr/lib/*/libplc4.so r,
+    /usr/lib/*/libplds4.so r,
+    /usr/lib/*/libnspr4.so r,
+    /usr/lib/*/libsqlite3.so.* r,
+    /usr/lib/*/nss/lib*.so r,
     /usr/lib/*/jni/libatk-wrapper.so.* r,
     /usr/lib/jvm/java-*-*/jre/lib/*/server/libjvm.so r,
     /usr/lib/jvm/java-*-*/jre/lib/*/lib*.so r,
