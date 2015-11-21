@@ -73,6 +73,7 @@
     @{PROC}/@{pid}/fd/ r,
     deny @{PROC}/ r,
 
+	/dev/full r,
     /dev/tty r,
     /dev/dri/card* rw,
     /etc/drirc r,
@@ -128,6 +129,7 @@
     owner @{HOME}/.minecraft/servers.dat* rw,
     owner @{HOME}/.minecraft/usercache.json* rw,
     owner @{HOME}/.minecraft/textures_*.png rw,
+    owner @{HOME}/.minecraft/server-resource-packs/** r,
 
     owner @{HOME}/.java/ rw,
     owner @{HOME}/.java/** rw,
