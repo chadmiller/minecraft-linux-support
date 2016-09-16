@@ -54,8 +54,8 @@
     /sys/devices/system/cpu/** r,
     /sys/devices/pci????:??/????:??:??.*/????:??:??.*/uevent r,
     /sys/devices/pci????:??/????:??:??.*/uevent r,
-	/run/udev/data/+pci:????:??:??.* r,
-	/etc/udev/udev.conf r,
+    /run/udev/data/+pci:????:??:??.* r,
+    /etc/udev/udev.conf r,
     @{PROC}/@{pid}/stat r,
     @{PROC}/stat r,
 
@@ -64,6 +64,7 @@
     /tmp/imageio*.tmp rw,
 
     /usr/share/javazi/** r,
+    /usr/share/zoneinfo/posixrules r,
 
     @{PROC}/@{pid}/net/if_inet6 r,
     @{PROC}/@{pid}/net/ipv6_route r,
@@ -73,7 +74,7 @@
     @{PROC}/@{pid}/fd/ r,
     deny @{PROC}/ r,
 
-	/dev/full r,
+    /dev/full r,
     /dev/tty r,
     /dev/dri/card* rw,
     /etc/drirc r,
@@ -96,6 +97,8 @@
     /etc/lsb-release r,
     /var/lib/dbus/machine-id r,
     /etc/gai.conf r,
+
+    /usr/share/mime/** r,
 
     deny @{PROC}/@{pid}/maps r,
 
@@ -129,7 +132,7 @@
     owner @{HOME}/.minecraft/servers.dat* rw,
     owner @{HOME}/.minecraft/usercache.json* rw,
     owner @{HOME}/.minecraft/textures_*.png rw,
-    owner @{HOME}/.minecraft/server-resource-packs/** r,
+    owner @{HOME}/.minecraft/server-resource-packs/** rw,
 
     owner @{HOME}/.java/ rw,
     owner @{HOME}/.java/** rw,
@@ -142,6 +145,7 @@
     deny /proc/filesystems r,
     deny /proc/*/mounts r,
 
+    /proc/sys/kernel/osrelease r,
     /proc/uptime r,
     /proc/cpuinfo r,
     /proc/sys/vm/overcommit_memory r,
