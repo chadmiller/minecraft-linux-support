@@ -36,7 +36,7 @@
   deny /usr/lib/python*/dist-packages/apport* r,
   deny /etc/apparmor.d/ r,
 
-  deny ${HOME}/.wget-hsts,
+  deny ${HOME}/.wget-hsts r,
 
   deny /usr/bin/id x,
   deny /etc/passwd r,
